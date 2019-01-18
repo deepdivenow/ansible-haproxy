@@ -1,0 +1,92 @@
+# defaults file for haproxy
+---
+haproxy_install: []
+
+haproxy_restart_handler_state: restarted
+
+# global section
+haproxy_global_log:
+  - address: 127.0.0.1
+    facility: local2
+
+haproxy_global_stats:
+  sockets:
+    - listen: /var/lib/haproxy/stats
+  timeout: 30s
+
+haproxy_global_pidfile: /var/run/haproxy.pid
+haproxy_global_chroot: /var/lib/haproxy
+haproxy_global_maxconn: 4000
+haproxy_global_user: haproxy
+haproxy_global_group: haproxy
+haproxy_global_daemon: true
+haproxy_global_ca_base: /etc/ssl/certs
+haproxy_global_crt_base: /etc/ssl/private
+haproxy_global_ssl_default_bind_ciphers: 'kEECDH+aRSA+AES:kRSA+AES:+AES256:RC4-SHA:!kEDH:!LOW:!EXP:!MD5:!aNULL:!eNULL'
+haproxy_global_ssl_default_bind_options: 'no-sslv3'
+haproxy_global_ssl_default_server_ciphers: 'kEECDH+aRSA+AES:kRSA+AES:+AES256:RC4-SHA:!kEDH:!LOW:!EXP:!MD5:!aNULL:!eNULL'
+haproxy_global_ssl_default_server_options: 'no-sslv3'
+haproxy_global_nbproc: 1
+haproxy_global_option: []
+
+# defaults section
+haproxy_defaults_log: global
+haproxy_defaults_mode: http
+haproxy_defaults_option:
+  - httplog
+  - dontlognull
+  - http-server-close
+  - "forwardfor    except 127.0.0.0/8"
+  - "redispatch"
+haproxy_defaults_retries: 3
+haproxy_default_server_params: []
+haproxy_defaults_timeout:
+  - type: http-request
+    timeout: 10s
+  - type: queue
+    timeout: 1m
+  - type: connect
+    timeout: 10s
+  - type: client
+    timeout: 1m
+  - type: server
+    timeout: 1m
+  - type: http-keep-alive
+    timeout: 10s
+  - type: check
+    timeout: 10s
+haproxy_defaults_maxconn: 3000
+
+haproxy_defaults_errorfile: []
+#  - code: 400
+#    file: /etc/haproxy/errors/400.http
+#  - code: 403
+#    file: /etc/haproxy/errors/403.http
+#  - code: 408
+#    file: /etc/haproxy/errors/408.http
+#  - code: 500
+#    file: /etc/haproxy/errors/500.http
+#  - code: 502
+#    file: /etc/haproxy/errors/502.http
+#  - code: 503
+#    file: /etc/haproxy/errors/503.http
+#  - code: 504
+#    file: /etc/haproxy/errors/504.http
+
+# ssl (file) map
+haproxy_ssl_map: []
+
+# listen section
+haproxy_listen: []
+
+# front-end section
+haproxy_frontend: []
+
+# back-end section
+haproxy_backend: []
+
+# user-lists section
+haproxy_userlists: []
+
+# ACL files
+haproxy_acl_files: []

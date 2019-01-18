@@ -1,0 +1,6 @@
+# tasks file for haproxy
+---
+- name: install | haproxy package
+  yum:
+    name: haproxy
+    state: installed

@@ -1,0 +1,26 @@
+# tasks file for haproxy
+---
+#- name: check version support
+#  fail:
+#    msg: "HAProxy version {{ haproxy_version }} is not supported"
+#  when: haproxy_version | string not in haproxy_versions_supported
+#  tags: [haproxy,haproxy-check-version]
+
+- include: install.yml
+  tags: [haproxy,haproxy-install]
+
+- include: certificates.yml
+  tags: [haproxy,haproxy-certificates]
+
+- include: acl.yml
+  tags: [haproxy,haproxy-acl]
+
+- include: configuration.yml
+  tags: [haproxy,haproxy-configuration]
+
+- name: start and enable service
+  service:
+    name: haproxy
+    state: started
+    enabled: true
+  tags: [haproxy,haproxy-service]
