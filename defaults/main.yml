@@ -7,7 +7,7 @@ haproxy_restart_handler_state: restarted
 # global section
 haproxy_global_log:
   - address: 127.0.0.1
-    facility: local2
+    facility: local0
 
 haproxy_global_stats:
   sockets:

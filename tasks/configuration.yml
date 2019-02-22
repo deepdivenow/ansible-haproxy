@@ -10,3 +10,9 @@
     validate: 'haproxy -f %s -c'
   notify: restart haproxy
 
+# setsebool -P haproxy_connect_any 1
+- name: Allow haproxy connects to any host
+  seboolean:
+    name: haproxy_connect_any
+    state: yes
+    persistent: yes
